@@ -8,7 +8,7 @@
 
 `v0.7.0` · `Manifest V3` · `JavaScript` · `Local storage`
 
-[Türkçe](#turkce) · [English](#english) · [Kaynak / Source](extension/) · [İnceleme / Review](docs/REVIEW.md)
+[Türkçe](#turkce) · [English](#english) · [Kaynak / Source](extension/)
 
 <a id="turkce"></a>
 ## Türkçe
@@ -121,7 +121,7 @@ Listing IDs, titles, prices, image URLs, listing URLs, queue state, progress, re
 The inspected source contains no developer backend, analytics, remote code loading or separate data-upload calls. Renewal still performs normal Letgo network operations through your signed-in session. Clicking the developer link opens LinkedIn. Local state has no automatic expiry; uninstalling the extension clears its local storage.
 
 ### Technology
-Plain JavaScript, HTML and CSS, with no build step. Chrome Manifest V3 service worker, extension messaging, local storage and Web Crypto SHA-256. See the directory map above and the [publication review](docs/REVIEW.md).
+Plain JavaScript, HTML and CSS, with no build step. Chrome Manifest V3 service worker, extension messaging, local storage and Web Crypto SHA-256. See the directory map above.
 
 ### Version, assets and licensing
 The manifest version is **0.7.0**. Renewal logic is preserved from the supplied archive. This GitHub source edition omits Gilroy font binaries and uses Arial/sans-serif instead, so its typography may differ slightly from the original package and promotional cover. The cover is a promotional illustration, not evidence of a live successful run.
