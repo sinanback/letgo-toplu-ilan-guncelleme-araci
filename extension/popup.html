@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Letgo Toplu İlan Güncelleme Aracı</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand-block">
+      <img class="brand-mark" src="icons/brand-logo.png" alt="Muhammed Sinan Aydın logosu">
+      <div class="brand-copy">
+        <strong>LETGO TOPLU İLAN GÜNCELLEME ARACI</strong>
+        <small>Süresi dolan ilanları bul ve güvenle güncelle</small>
+        <a class="editor-link" href="https://www.linkedin.com/in/sinanback/" target="_blank" rel="noopener noreferrer" aria-label="Muhammed Sinan Aydın LinkedIn profili"><span class="linkedin-mark" aria-hidden="true">in</span><span>Editör: Muhammed Sinan Aydın</span></a>
+      </div>
+    </div>
+    <button id="infoBtn" class="icon-button" aria-label="Özellikler ve gizlilik bilgisi">i</button>
+  </header>
+  <div class="sakura-branch" aria-hidden="true"><span></span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="sakura-petals" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <main>
+    <section class="command-card" aria-label="Tarama özeti">
+      <div class="command-topline"><span class="live-dot"><i aria-hidden="true"></i> KORUMA AÇIK</span><span class="free-badge">Tamamen ücretsiz</span></div>
+      <div class="command-metric">
+        <div><strong id="itemCount">0 ilan</strong><span>Taranan ilanlar</span></div>
+        <div class="metric-progress"><span id="progressValue">0 / 0</span><small>işlendi</small></div>
+      </div>
+      <div id="progressRing" class="progress-track" style="--progress:0"><i></i></div>
+      <p>Ücretli seçenekler otomatik reddedilir. Toplam tutar 0 TL değilse yayınlama durur.</p>
+    </section>
+    <section class="scan-actions" aria-label="Tarama işlemleri">
+      <button id="openScanPage" class="page-button"><svg class="button-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-8 8M19 13v5a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></svg><span>Tarama Sayfasını Aç</span></button>
+      <button id="scan" class="scan-button"><svg class="button-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="5.5"/><path d="m15 15 4.5 4.5"/></svg><span>İlanları Tara</span></button>
+    </section>
+    <section class="list-card">
+      <header class="list-heading"><div><h2>Yenileme kuyruğu</h2></div><p>Yenilenecek ilanları seçin</p></header>
+      <div class="list-tools"><label class="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="5.5"/><path d="m15 15 4.5 4.5"/></svg><input id="search" type="search" placeholder="İlanlarda ara…" autocomplete="off"></label></div>
+      <div class="selection-bar"><span id="selectionCount">0 ilan seçildi</span><label class="select-all">Tümünü seç <input id="selectAll" type="checkbox"></label></div>
+      <div id="empty" class="empty-state"><span class="empty-glyph" aria-hidden="true">◇</span><strong>Kuyruk henüz boş</strong><p>Süresi dolmuş ilanlar sayfasındayken “İlanları Tara” düğmesine basın.</p></div>
+      <div id="items" class="items" aria-live="polite"></div>
+    </section>
+    <section id="resultPanel" class="result-panel" hidden><div class="result-title"><h2>Çalışma raporu</h2><span id="resultSummary"></span></div><div id="results"></div></section>
+    <div id="status" class="status" role="status"></div>
+  </main>
+  <footer class="footer-actions">
+    <button id="selected" class="primary-action" disabled><span id="selectedLabel">Seçilenleri Yenile</span><span aria-hidden="true">→</span></button>
+    <button id="all" class="secondary-action" disabled>Tümünü Yenile</button>
+    <button id="stop" class="stop-action" disabled>İşlemi Durdur</button>
+  </footer>
+  <div id="scanConfirm" class="modal-layer" role="alertdialog" aria-modal="true" aria-labelledby="scanConfirmTitle" hidden>
+    <section class="modal-card scan-confirm-card">
+      <span class="modal-symbol warning" aria-hidden="true">!</span><span class="modal-kicker">İŞLEM BAŞLATILAMADI</span>
+      <h2 id="scanConfirmTitle">Tarama sayfası açık değil</h2>
+      <p>Tarama sayfasında olmadığınız için işleme başlanamadı. Önce Letgo’daki <strong>İlanlarım → Süresi Dolmuş</strong> sayfasını açın, ardından <strong>İlanları Tara</strong> düğmesine basın.</p>
+      <div class="modal-actions"><button id="scanCancel" class="modal-secondary">Kapat</button><button id="scanOpen" class="modal-primary">Tarama Sayfasını Aç</button></div>
+    </section>
+  </div>
+  <div id="infoPanel" class="modal-layer info-layer" role="dialog" aria-modal="true" aria-labelledby="infoTitle" hidden>
+    <section class="info-sheet">
+      <header class="info-header"><div><span class="modal-kicker">UZANTI BİLGİSİ</span><h2 id="infoTitle">Özellikler ve Gizlilik</h2></div><button id="infoClose" class="sheet-close" aria-label="Bilgi penceresini kapat">×</button></header>
+      <div class="info-scroll">
+        <section class="info-section"><h3>Bu uzantı ne yapar?</h3><ul><li>Letgo’daki süresi dolmuş ilanları tarar ve seçtiklerinizi sırayla yeniden yayınlar.</li><li>İlan başlığı, fiyatı, kapak görseli ve form durumunu değiştirmeden doğrular.</li><li>Fiyat onaylarını yalnızca taranan fiyatla eşleştiğinde kabul eder.</li><li>Vitamin seçimini kaldırır; toplam tam olarak <strong>0 TL</strong> değilse yayınlamaz.</li><li>Kaldırılmış ilanı atlayıp sıradaki ilana geçer; beklenmeyen veya riskli ekranda durur.</li></ul></section>
+        <section class="info-section privacy-copy">
+          <h3>Gizlilik Politikası — Toplu İlan Yenileme</h3><p><em>Son güncelleme: 11 Ekim 2026</em></p>
+          <p>Bu uzantı, letgo.com üzerinde süresi dolmuş ilanları toplu olarak yeniden yayınlamanıza yardımcı olan bağımsız bir Chrome uzantısıdır. letgo ile resmi bir bağlantısı yoktur.</p><p><strong>Geliştirici:</strong> Muhammed Sinan Aydın</p>
+          <h4>1. Tarayıcıda saklanan veriler</h4><p>Tarama sonuçları (ilan numarası, ad, görsel adresi, fiyat ve bağlantı), çalışma sırası, ilerleme, sonuçlar ve güvenlik kilitleri yalnızca <code>chrome.storage.local</code> içinde saklanır.</p>
+          <h4>2. Sunucuya gönderilen veriler</h4><p>Uzantının geliştiriciye ait bir sunucusu, lisans servisi, üyelik sistemi veya analiz sistemi yoktur. Saklanan bilgiler geliştiriciye ya da başka bir harici sunucuya gönderilmez. Yenileme sırasında yalnızca açık Letgo oturumunuz üzerinden letgo.com’un normal sayfa işlemleri gerçekleşir.</p>
+          <h4>3. İstenen erişimler</h4><ul><li><strong>storage:</strong> tarama ve çalışma durumunu cihazda saklamak için.</li><li><strong>letgo.com site erişimi:</strong> yalnızca letgo.com sayfalarında ilanları okumak ve kullanıcı tarafından başlatılan yenileme adımlarını yürütmek için.</li></ul>
+          <p>Uzantı; Chrome profil e-postası, kimlik, şifre, mesajlar, genel gezinme geçmişi, ödeme bilgileri, cihaz kimliği veya konum izni istemez.</p>
+          <h4>4. Saklama ve silme</h4><p>Yerel veriler Chrome’un uzantı depolamasında kalır. Uzantıyı kaldırdığınızda Chrome bu yerel alanı siler.</p><h4>5. Kullanım</h4><p>Uzantı yaş bilgisi istemez veya yaşa ilişkin kişisel veri toplamaz.</p><h4>6. Değişiklikler ve iletişim</h4><p>Politika değişirse tarih ve bu metin güncellenir. Destek iletişimi geliştirici tarafından ayrıca paylaşılabilir.</p>
+        </section>
+      </div>
+    </section>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

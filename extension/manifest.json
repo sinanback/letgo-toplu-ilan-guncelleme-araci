@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "Letgo Toplu İlan Güncelleme Aracı",
+  "version": "0.7.0",
+  "description": "Süresi dolmuş ilanları mevcut bilgilerle sırayla ve ücretsiz yeniler. Beklenmeyen durumda durur.",
+  "permissions": [
+    "storage"
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Letgo Toplu İlan Güncelleme Aracı",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.letgo.com/*"
+      ],
+      "js": [
+        "core.js",
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

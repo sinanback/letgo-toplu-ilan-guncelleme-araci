@@ -1,0 +1,26 @@
+# Credentials and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+credentials*.json
+secrets*.json
+# Private browser state and local tooling
+node_modules/
+.venv/
+__pycache__/
+*.log
+work/
+browser-profile/
+user-data/
+# Generated packages and OS files
+*.zip
+*.crx
+.DS_Store
+Thumbs.db
+# Font binaries require separate redistribution clearance
+*.otf
+*.ttf
