@@ -65,7 +65,6 @@ extension/
   content.js          Sayfa kontrolleri ve yenileme akışı
   popup.html/css/js    Kontrol paneli
   icons/              Uzantı simgeleri ve geliştirici logosu
-docs/REVIEW.md        Yayın öncesi inceleme ve doğrulama
 ```
 
 ### Sürüm, görseller ve lisans durumu
